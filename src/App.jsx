@@ -904,49 +904,26 @@ function App() {
       ========================================= */}
 
       <footer className="footer">
+  <div className="footer-inner">
+    <div className="footer-brand">
+      <img src={logo} alt="Morya Dairy Farms" />
+      <p>Morya Dairy Farms</p>
+    </div>
 
-        <div className="footer-container">
-
-
-          <div className="footer-brand">
-
-            <img
-              src={logo}
-              alt="Morya Dairy Farms"
-            />
-
-            <div>
-
-              <strong>
-                MORYA
-              </strong>
-
-              <span>
-                DAIRY FARMS
-              </span>
-
-            </div>
-
-          </div>
-
-
-          <p>
-            © 2026 Morya Dairy Farms.
-            All rights reserved.
-          </p>
-
-
-          <a
-            href="#home"
-            className="back-top"
-          >
-            BACK TO TOP ↑
-          </a>
-
-
-        </div>
-
-      </footer>
+    <div className="footer-credit">
+      <p>
+        © 2026 Morya Dairy Farms · Designed & Developed by{" "}
+        <a
+          href="https://github.com/chaitanyapingaleAC"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          Chaitanya Pingale
+        </a>
+      </p>
+    </div>
+  </div>
+</footer>
 
 
     </div>
