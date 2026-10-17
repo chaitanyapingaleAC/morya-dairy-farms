@@ -4115,3 +4115,32 @@ button:focus-visible {
     color: #a17c38;
   }
 }
+
+
+/* Keep WhatsApp button above Netlify's deploy badge */
+.whatsapp-float {
+  position: fixed !important;
+  right: 24px !important;
+  bottom: 24px !important;
+  z-index: 9999 !important;
+}
+
+/* Mobile spacing */
+@media (max-width: 680px) {
+  .whatsapp-float {
+    right: 16px !important;
+    bottom: 20px !important;
+  }
+}
+
+
+/* WhatsApp button — mobile fix */
+@media (max-width: 680px) {
+  .whatsapp-float {
+    position: fixed !important;
+    right: 16px !important;
+    bottom: 85px !important;
+    z-index: 99999 !important;
+  }
+}
+
