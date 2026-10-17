@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import "./App.css";
 
 import logo from "./assets/images/morya-logo.png";
@@ -24,6 +24,49 @@ function App() {
     setMenuOpen(false);
   };
 
+  useEffect(() => {
+  if (
+    window.matchMedia("(prefers-reduced-motion: reduce)").matches ||
+    !("IntersectionObserver" in window)
+  ) {
+    return;
+  }
+
+  const elements = document.querySelectorAll(
+    ".farm-card, .about-image-wrapper, .about-content, " +
+    ".stat, .gallery-item, .video-card, " +
+    ".instagram-content, .instagram-visual, .contact-links"
+  );
+
+  const observer = new IntersectionObserver(
+    (entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add("is-visible");
+          observer.unobserve(entry.target);
+        }
+      });
+    },
+    {
+      threshold: 0.12,
+      rootMargin: "0px 0px -35px 0px",
+    }
+  );
+
+  elements.forEach((element, index) => {
+    element.classList.add("reveal-ready");
+    element.style.setProperty(
+      "--reveal-delay",
+      `${(index % 3) * 90}ms`
+    );
+    observer.observe(element);
+  });
+
+  return () => observer.disconnect();
+}, []);
+
+
+
 
   const instagramUrl =
     "https://www.instagram.com/morya_dairy_farm_?stkn=MXFxaGhqaG4wcGV0Zg==";
@@ -33,6 +76,57 @@ function App() {
 
   const mapsUrl =
     "https://maps.app.goo.gl/WPmTRjoK6CWoriae6";
+
+
+    // Scroll reveal animations
+useEffect(() => {
+  const elements = document.querySelectorAll(
+    [
+      ".section-heading",
+      ".farm-card",
+      ".about-image-wrapper",
+      ".about-content",
+      ".stat",
+      ".gallery-heading",
+      ".gallery-item",
+      ".videos-heading",
+      ".video-card",
+      ".instagram-content",
+      ".instagram-visual",
+      ".contact-grid > div",
+    ].join(", ")
+  );
+
+  // Keep animations disabled when the user prefers reduced motion.
+  if (
+    window.matchMedia("(prefers-reduced-motion: reduce)").matches ||
+    !("IntersectionObserver" in window)
+  ) {
+    return;
+  }
+
+  const observer = new IntersectionObserver(
+    (entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add("is-visible");
+          observer.unobserve(entry.target);
+        }
+      });
+    },
+    {
+      threshold: 0.08,
+      rootMargin: "0px 0px -30px 0px",
+    }
+  );
+
+  elements.forEach((element) => {
+    element.classList.add("scroll-reveal");
+    observer.observe(element);
+  });
+
+  return () => observer.disconnect();
+}, []);
 
 
   return (
@@ -896,6 +990,26 @@ function App() {
         </section>
 
       </main>
+
+
+
+        {/* Floating WhatsApp Enquiry Button */}
+      <a
+       href="https://wa.me/918983741022?text=Hello%20Morya%20Dairy%20Farms!%20I%20am%20interested%20in%20your%20dairy%20products.%20Could%20you%20please%20share%20more%20details%3F"
+        className="whatsapp-float"
+        target="_blank"
+        rel="noopener noreferrer"
+        aria-label="Enquire with Morya Dairy Farms on WhatsApp"
+      >
+        <svg viewBox="0 0 24 24" aria-hidden="true">
+          <path
+            fill="currentColor"
+            d="M20.52 3.48A11.8 11.8 0 0 0 12.08 0C5.5 0 .15 5.35.15 11.93c0 2.1.55 4.15 1.6 5.96L.05 24l6.27-1.64a11.9 11.9 0 0 0 5.75 1.47h.01c6.58 0 11.93-5.35 11.93-11.93 0-3.19-1.24-6.19-3.49-8.42ZM12.08 21.8h-.01a9.9 9.9 0 0 1-5.04-1.38l-.36-.21-3.72.97.99-3.63-.24-.37a9.86 9.86 0 0 1-1.51-5.25c0-5.47 4.45-9.92 9.93-9.92 2.65 0 5.14 1.03 7.01 2.91a9.87 9.87 0 0 1 2.9 7.02c0 5.47-4.45 9.92-9.92 9.92Zm5.44-7.43c-.3-.15-1.77-.87-2.04-.97-.27-.1-.47-.15-.67.15-.2.3-.77.97-.94 1.17-.17.2-.35.22-.65.07-.3-.15-1.27-.47-2.42-1.5-.9-.8-1.5-1.79-1.68-2.09-.17-.3-.02-.46.13-.61.13-.13.3-.35.45-.52.15-.17.2-.3.3-.5.1-.2.05-.37-.03-.52-.07-.15-.67-1.62-.92-2.22-.24-.58-.49-.5-.67-.51h-.57c-.2 0-.52.07-.79.37-.27.3-1.04 1.02-1.04 2.49s1.07 2.89 1.22 3.09c.15.2 2.1 3.2 5.09 4.49.71.31 1.26.5 1.69.63.71.23 1.36.2 1.87.12.57-.08 1.77-.72 2.02-1.42.25-.7.25-1.3.17-1.42-.07-.13-.27-.2-.57-.35Z"
+          />
+        </svg>
+
+        <span>Enquire on WhatsApp</span>
+      </a>
 
 
 
