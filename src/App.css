@@ -4155,3 +4155,14 @@ button:focus-visible {
   }
 }
 
+
+/* Desktop WhatsApp button fix */
+@media (min-width: 681px) {
+  .whatsapp-float {
+    position: fixed !important;
+    right: 24px !important;
+    bottom: 90px !important;
+    top: auto !important;
+    z-index: 2147483647 !important;
+  }
+}
